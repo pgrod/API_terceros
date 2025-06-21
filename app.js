@@ -32,9 +32,9 @@ app.put('/api/products:id', async (req, res) => {
 });
 
 app.post('/api/products', async (req,res)=>{
-  const post=req.body;
+  const producto=req.body;
   try{
-    const axiosResponse= await axios.post(ENDPOINT_API_Terceros,post)
+    const axiosResponse= await axios.post(ENDPOINT_API_Terceros,producto);
     res.status(200).json({status:200, message:"Success",data: axiosResponse.data})
   }catch(e){
     res.status(500).json({status:500,message:"Internal Server Error"})
@@ -42,10 +42,10 @@ app.post('/api/products', async (req,res)=>{
 })
 
 
-app.post('/api/products', async (req,res)=>{
-  const post=req.body;
+app.delete('/api/products/:id', async (req,res)=>{
+  const id=req.body.id;
   try{
-    const axiosResponse= await axios.post(ENDPOINT_API_Terceros,post)
+    const axiosResponse= await axios.delete(`${ENDPOINT_API_Terceros}/${id}`)
     res.status(200).json({status:200, message:"Success",data: axiosResponse.data})
   }catch(e){
     res.status(500).json({status:500,message:"Internal Server Error"})
