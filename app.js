@@ -22,8 +22,18 @@ app.get('/api/products', async (req, res) => {
 app.post('/api/products', async (req,res)=>{
   const post=req.body;
   try{
-    let url=process.env.ENDPOINT_API_TERCEROS+"/posts";
-    const axiosResponse= await axios.post(url,post)
+    const axiosResponse= await axios.post(ENDPOINT_API_Terceros,post)
+    res.status(200).json({status:200, message:"Success",data: axiosResponse.data})
+  }catch(e){
+    res.status(500).json({status:500,message:"Internal Server Error"})
+  }
+})
+
+
+app.post('/api/products', async (req,res)=>{
+  const post=req.body;
+  try{
+    const axiosResponse= await axios.post(ENDPOINT_API_Terceros,post)
     res.status(200).json({status:200, message:"Success",data: axiosResponse.data})
   }catch(e){
     res.status(500).json({status:500,message:"Internal Server Error"})
