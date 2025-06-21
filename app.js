@@ -18,6 +18,18 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+app.put('/api/products:id', async (req, res) => {
+  const {id} = req.params;
+  const data = req.body;
+  try {
+    const response = await axios.put(`${ENDPOINT_API_Terceros}/${id}`, data);
+    res.json(response.data);
+    res.status(200).json({ status: 200, message: 'Success', data: response.data });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: 'Error en actualizacion de producto'});
+  }
+});
 
 app.post('/api/products', async (req,res)=>{
   const post=req.body;
