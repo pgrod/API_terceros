@@ -18,6 +18,25 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+
+app.post('/api/products', async (req,res)=>{
+  const post=req.body;
+  try{
+    let url=process.env.ENDPOINT_API_TERCEROS+"/posts";
+    const axiosResponse= await axios.post(url,post)
+    res.status(200).json({status:200, message:"Success",data: axiosResponse.data})
+  }catch(e){
+    res.status(500).json({status:500,message:"Internal Server Error"})
+  }
+})
+
+
+
+
+
+
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
